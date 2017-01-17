@@ -3,7 +3,7 @@ const fs = require('fs');
 const {openRedis,setRedis,getRedis,closeRedis}=require('./redis');
 const cookies=require('cookies');
 const formidable = require("formidable");
-cacheList=[];
+
 const public={
       xss(data,opt){
           if(typeof data !== 'object') return new Error('no object')
@@ -105,7 +105,7 @@ const public={
           global.cacheList.push(modulePath)
           let moduleName=require(modulePath)
           moduleName(data,req,res).then(dt=>this.toapi(dt)).then(dt=>{
-            this.delCache();
+            this.delCache(); // 生产模式可以关闭  用于删除require缓存
             this.setjsonp(res);res.end(dt)})
       },
       uploadimg(req,res,reqModuleName,urlData){
@@ -117,8 +117,8 @@ const public={
                   this.toapi({code:2,err:err}).then(dt=>res.end(dt))
               })
               .on('field', function(field, value) {
-                  if (form.type == 'multipart') {  //有文件上传时 enctype="multipart/form-data"
-                      if (field in post) { //同名表单 checkbox 返回array 同get处理
+                  if (form.type == 'multipart') { 
+                      if (field in post) { 
                           if (util.isArray(post[field]) === false) {
                               post[field] = [post[field]];
                           }
@@ -128,7 +128,7 @@ const public={
                   }
                   post[field] = value;
               })
-              .on('file', function(field, file) { //上传文件
+              .on('file', function(field, file) { 
                   if(file.size>5000000) return this.toapi({code:2,err:'图片大小过大'}).then(dt=>res.end(dt))
                   file[field] = file;
 
