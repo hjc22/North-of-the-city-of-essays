@@ -1,0 +1,26 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "cheerio": "^0.22.0",
+    "co": "^4.6.0",
+    "cookie-parser": "^1.4.3",
+    "cookies": "^0.6.2",
+    "formidable": "^1.0.17",
+    "highlight.js": "^9.8.0",
+    "marked": "^0.3.6",
+    "mongodb": "^2.2.11",
+    "n": "^2.1.4",
+    "redis": "^2.6.3",
+    "request": "^2.79.0",
+    "xss": "^0.3.1"
+  }
+}
